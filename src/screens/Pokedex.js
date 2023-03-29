@@ -6,7 +6,7 @@ import PokemonList from "../components/PokemonList";
 
 export default function Pokedex() {
   const [pokemon, setPokemon] = useState([]);
-  console.log("Pokemon--->", pokemon);
+
   useEffect(() => {
     (async () => {
       await loadPokemon();
@@ -44,7 +44,7 @@ export default function Pokedex() {
 
   return (
     <SafeAreaView>
-      <Text>Pokedex</Text>
+      <PokemonList pokemon={pokemon} />
     </SafeAreaView>
   );
 }

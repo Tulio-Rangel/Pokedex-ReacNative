@@ -1,11 +1,25 @@
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, FlatList, StyleSheet } from "react-native";
 import React from "react";
 
-export default function PokemonList() {
+export default function PokemonList(props) {
+  const { pokemon } = props;
   return (
-    <SafeAreaView>
-      <Text>PokemonList</Text>
-    </SafeAreaView>
+    <FlatList
+      data={pokemon}
+      numColumns={2}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(xPokemon) => String(xPokemon.id)}
+      renderItem={({ item }) => <Text>{item.name}</Text>}
+      contentContainerStyle={styles}
+    />
   );
 }
+
+const styles = StyleSheet.create({
+  flatListContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
