@@ -51,3 +51,11 @@ function renderBall() {
     />
   );
 }
+
+//Otra forma de escribir el render ball
+const renderPokeball = () => (
+  <Image
+    source={require("../assets/pokeball.png")}
+    style={{ width: 75, height: 75, top: -15 }}
+  />
+);
