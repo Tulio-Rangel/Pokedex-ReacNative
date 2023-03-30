@@ -42,8 +42,8 @@ export default function Pokedex() {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <PokemonList pokemon={pokemon} />
-    </View>
+    </SafeAreaView>
   );
 }
