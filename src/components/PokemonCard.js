@@ -6,9 +6,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
+import getColorByPokemonType from "../utils/getColorByPokemonType";
 
 export default function PokemonCard(props) {
   const { pokemon } = props;
+
+  //con el ...operator copiamos lo que esta en bgStyle(en styles) y lo pegamos en y lo pegamos en esta constante que estamos haciendo
+  const bgStyles = { backgroundColor: "#f0f", ...styles.bgStyles };
 
   const goToPokemon = () => {
     console.log(`Vamos al pokemon: ${pokemon.name}`);
@@ -18,7 +22,7 @@ export default function PokemonCard(props) {
     <TouchableWithoutFeedback onPress={goToPokemon}>
       <View style={styles.card}>
         <View style={styles.spacing}>
-          <View style={styles.bgStyles}>
+          <View style={bgStyles}>
             <Text style={styles.number}>
               #{`${pokemon.order}`.padStart(3, 0)}
             </Text>
@@ -41,9 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
   },
-  bgStyles: {
-    backgroundColor: "grey",
-  },
   image: {
     position: "absolute",
     bottom: 2,
@@ -64,5 +65,10 @@ const styles = StyleSheet.create({
     top: 10,
     color: "#fff",
     fontSize: 11,
+  },
+  bgStyles: {
+    flex: 1,
+    borderRadius: 15,
+    padding: 10,
   },
 });
