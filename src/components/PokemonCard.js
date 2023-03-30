@@ -11,14 +11,14 @@ import getColorByPokemonType from "../utils/getColorByPokemonType";
 
 export default function PokemonCard(props) {
   const { pokemon } = props;
-  console.log(`Tipos de pokemon ${pokemon.types}`);
+  console.log(`Tipos de pokemon: ${pokemon.types}`);
   const pokemonColor = getColorByPokemonType(pokemon.types);
-  console.log(`Colores de pokemon ${pokemonColor}`);
+  console.log(`Colores de pokemon: ${pokemonColor}`);
 
   //const gradientColors = pokemonColor.filter((color) => color != null);
   const gradientColors = pokemonColor.map((color) => color || pokemonColor[0]);
 
-  console.log(`Gradientes de pokemon ${gradientColors}`);
+  console.log(`Gradientes de pokemon: ${gradientColors}`);
 
   //con el ...operator copiamos lo que esta en bgStyle(en styles) y lo pegamos en y lo pegamos en esta constante que estamos haciendo
   const bgStyles = {
@@ -34,7 +34,12 @@ export default function PokemonCard(props) {
     <TouchableWithoutFeedback onPress={goToPokemon}>
       <View style={styles.card}>
         <View style={styles.spacing}>
-          <LinearGradient colors={gradientColors} style={bgStyles}>
+          <LinearGradient
+            colors={gradientColors}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={bgStyles}
+          >
             <Text style={styles.number}>
               #{`${pokemon.order}`.padStart(3, 0)}
             </Text>
