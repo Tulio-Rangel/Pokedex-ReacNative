@@ -6,13 +6,25 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import getColorByPokemonType from "../utils/getColorByPokemonType";
 
 export default function PokemonCard(props) {
   const { pokemon } = props;
+  console.log(`Tipos de pokemon ${pokemon.types}`);
+  const pokemonColor = getColorByPokemonType(pokemon.types);
+  console.log(`Colores de pokemon ${pokemonColor}`);
+
+  //const gradientColors = pokemonColor.filter((color) => color != null);
+  const gradientColors = pokemonColor.map((color) => color || pokemonColor[0]);
+
+  console.log(`Gradientes de pokemon ${gradientColors}`);
 
   //con el ...operator copiamos lo que esta en bgStyle(en styles) y lo pegamos en y lo pegamos en esta constante que estamos haciendo
-  const bgStyles = { backgroundColor: "#f0f", ...styles.bgStyles };
+  const bgStyles = {
+    ...styles.bgStyles,
+    backgroundColor: pokemonColor[0],
+  };
 
   const goToPokemon = () => {
     console.log(`Vamos al pokemon: ${pokemon.name}`);
@@ -22,13 +34,13 @@ export default function PokemonCard(props) {
     <TouchableWithoutFeedback onPress={goToPokemon}>
       <View style={styles.card}>
         <View style={styles.spacing}>
-          <View style={bgStyles}>
+          <LinearGradient colors={gradientColors} style={bgStyles}>
             <Text style={styles.number}>
               #{`${pokemon.order}`.padStart(3, 0)}
             </Text>
             <Text style={styles.name}>{pokemon.name}</Text>
             <Image source={{ uri: pokemon.image }} style={styles.image} />
-          </View>
+          </LinearGradient>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -39,6 +51,10 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     height: 130,
+    shadowColor: "#171717",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
     //paddingTop: 20,
   },
   spacing: {
