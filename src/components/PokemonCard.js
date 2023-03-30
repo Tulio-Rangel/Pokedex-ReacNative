@@ -7,10 +7,13 @@ import {
 } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+//Lo usare para al darle a un pokemon me lleve a su info
+import { useNavigation } from "@react-navigation/native";
 import getColorByPokemonType from "../utils/getColorByPokemonType";
 
 export default function PokemonCard(props) {
   const { pokemon } = props;
+  const navigation = useNavigation();
   //console.log(`Tipos de pokemon: ${pokemon.types}`);
   const pokemonColor = getColorByPokemonType(pokemon.types);
   //console.log(`Colores de pokemon: ${pokemonColor}`);
@@ -26,7 +29,8 @@ export default function PokemonCard(props) {
   };
 
   const goToPokemon = () => {
-    console.log(`Vamos al pokemon: ${pokemon.name}`);
+    console.log(`Vamos al pokemon: ${pokemon.id}`);
+    navigation.navigate("Pokemon", { id: pokemon.id });
   };
 
   return (
