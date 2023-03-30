@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import { getPokemonApi, getPokemonDetailsByUrlApi } from "../api/pokemon";
@@ -6,6 +5,8 @@ import PokemonList from "../components/PokemonList";
 
 export default function Pokedex() {
   const [pokemon, setPokemon] = useState([]);
+  //Estado para cargar los siguiente 20 pokemon que estan en la priopiedad next del response de loadPokemon
+  const [nextUrl, setNextUrl] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -15,7 +16,9 @@ export default function Pokedex() {
 
   const loadPokemon = async () => {
     try {
-      const response = await getPokemonApi();
+      const response = await getPokemonApi(nextUrl);
+      setNextUrl(response.next);
+
       const pokemonArray = [];
 
       //Ejecutar en bucle async el array que me devuelve la api
@@ -43,7 +46,11 @@ export default function Pokedex() {
 
   return (
     <SafeAreaView>
-      <PokemonList pokemon={pokemon} />
+      <PokemonList
+        pokemon={pokemon}
+        loadPokemon={loadPokemon}
+        isNext={nextUrl}
+      />
     </SafeAreaView>
   );
 }
