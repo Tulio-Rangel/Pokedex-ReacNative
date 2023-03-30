@@ -29,7 +29,7 @@ export default function PokemonCard(props) {
   };
 
   const goToPokemon = () => {
-    console.log(`Vamos al pokemon: ${pokemon.id}`);
+    //console.log(`Vamos al pokemon: ${pokemon.id}`);
     navigation.navigate("Pokemon", { id: pokemon.id });
   };
 
