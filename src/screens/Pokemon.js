@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
 import { getPokemonDetailApi } from "../api/pokemon";
 import Header from "../components/Pokemon/Header";
+import Type from "../components/Pokemon/Type";
 
 export default function Pokemon(props) {
   const {
@@ -35,6 +36,12 @@ export default function Pokemon(props) {
         name={pokemon.name}
         order={pokemon.order}
         image={pokemon.sprites.other["official-artwork"].front_default}
+        types={[
+          pokemon.types[0].type.name,
+          pokemon.types.length > 1 ? pokemon.types[1].type.name : null,
+        ]}
+      />
+      <Type
         types={[
           pokemon.types[0].type.name,
           pokemon.types.length > 1 ? pokemon.types[1].type.name : null,

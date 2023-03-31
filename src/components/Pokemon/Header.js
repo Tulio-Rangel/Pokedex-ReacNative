@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 400,
     position: "absolute",
-    borderBottomEndRadius: 300,
+    //borderBottomEndRadius: 300,
     borderBottomLeftRadius: 300,
     transform: [{ scaleX: 2 }],
   },
