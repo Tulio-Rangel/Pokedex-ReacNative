@@ -43,9 +43,7 @@ export default function PokemonCard(props) {
             end={{ x: 1, y: 1 }}
             style={bgStyles}
           >
-            <Text style={styles.number}>
-              #{`${pokemon.order}`.padStart(3, 0)}
-            </Text>
+            <Text style={styles.number}>#{`${pokemon.id}`.padStart(3, 0)}</Text>
             <Text style={styles.name}>{pokemon.name}</Text>
             <Image source={{ uri: pokemon.image }} style={styles.image} />
           </LinearGradient>
