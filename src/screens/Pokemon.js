@@ -1,6 +1,7 @@
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { getPokemonDetailApi } from "../api/pokemon";
 import Header from "../components/Pokemon/Header";
 import Type from "../components/Pokemon/Type";
@@ -16,6 +17,22 @@ export default function Pokemon(props) {
   const [pokemon, setPokemon] = useState(null);
 
   //console.log(params.id);
+
+  //Cambio de la flecha back por defecto y agregar el icono de favoritos
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => null,
+      headerLeft: () => (
+        <Icon
+          name="arrow-left"
+          color="#fff"
+          size={20}
+          style={{ marginLeft: 20 }}
+          onPress={navigation.goBack}
+        />
+      ),
+    });
+  }, [navigation, params]); //Para cada vez que cambie de navigation o de parametro esto se vuelve a ejecutar
 
   useEffect(() => {
     (async () => {
