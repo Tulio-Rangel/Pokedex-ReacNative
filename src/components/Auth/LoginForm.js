@@ -6,17 +6,32 @@ import {
   Button,
   Keyboard,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup"; //Este es el sistema de validacion
+import { user, userDetails } from "../../utils/userDB";
 
 export default function LoginForm() {
+  //Cambio de estado para cuando se pongan las credenciales mal el usuario reciba un error
+  const [error, setError] = useState("");
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     //validationOnChange: false //Para que la validacion no sea en tiempo real sino cuando se le de submit
     onSubmit: (formValueEntered) => {
-      console.log(formValueEntered);
+      //Se limpia el estado al hacer submit
+      setError("");
+
+      const { username, password } = formValueEntered;
+
+      if (username !== user.username || password !== user.password) {
+        //aqui se dispara el error
+        setError("Usuario o contrasena incorrectos");
+      } else {
+        console.log("Usuario loggeado");
+        console.log(userDetails);
+      }
     },
   });
 
@@ -41,6 +56,8 @@ export default function LoginForm() {
       <Button title="Enter" onPress={formik.handleSubmit} />
       <Text style={styles.error}>{formik.errors.username}</Text>
       <Text style={styles.error}>{formik.errors.password}</Text>
+      {/* aqui se invoca el error si las credenciales son incorrectas y definimos en const [error, setError] = useState("");  */}
+      <Text style={styles.error}>{error}</Text>
     </View>
   );
 }
