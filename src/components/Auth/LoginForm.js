@@ -10,10 +10,13 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup"; //Este es el sistema de validacion
 import { user, userDetails } from "../../utils/userDB";
+import useAuth from "../../hooks/useAuth";
 
 export default function LoginForm() {
   //Cambio de estado para cuando se pongan las credenciales mal el usuario reciba un error
   const [error, setError] = useState("");
+
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -29,8 +32,7 @@ export default function LoginForm() {
         //aqui se dispara el error
         setError("Usuario o contrasena incorrectos");
       } else {
-        console.log("Usuario loggeado");
-        console.log(userDetails);
+        login(userDetails);
       }
     },
   });
