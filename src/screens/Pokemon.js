@@ -6,6 +6,7 @@ import { getPokemonDetailApi } from "../api/pokemon";
 import Header from "../components/Pokemon/Header";
 import Type from "../components/Pokemon/Type";
 import Stats from "../components/Pokemon/Stats";
+import Favorite from "../components/Pokemon/Favorite";
 
 export default function Pokemon(props) {
   const {
@@ -21,7 +22,7 @@ export default function Pokemon(props) {
   //Cambio de la flecha back por defecto y agregar el icono de favoritos
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => null,
+      headerRight: () => <Favorite />,
       headerLeft: () => (
         <Icon
           name="arrow-left"
