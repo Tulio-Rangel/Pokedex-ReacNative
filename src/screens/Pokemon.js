@@ -7,6 +7,7 @@ import Header from "../components/Pokemon/Header";
 import Type from "../components/Pokemon/Type";
 import Stats from "../components/Pokemon/Stats";
 import Favorite from "../components/Pokemon/Favorite";
+import useAuth from "../hooks/useAuth";
 
 export default function Pokemon(props) {
   const {
@@ -16,13 +17,15 @@ export default function Pokemon(props) {
 
   //Estado pokemon y luego la funcion que actualiza el estado, que inicialmente es nulo
   const [pokemon, setPokemon] = useState(null);
+  //Buscando que el boton favorito solo salga si se esta loggeado se pasa por el headerRight como un condicional
+  const { auth } = useAuth();
 
   //console.log(params.id);
 
   //Cambio de la flecha back por defecto y agregar el icono de favoritos
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Favorite />,
+      headerRight: () => auth && <Favorite />,
       headerLeft: () => (
         <Icon
           name="arrow-left"
