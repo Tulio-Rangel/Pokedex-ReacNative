@@ -25,7 +25,7 @@ export default function Pokemon(props) {
   //Cambio de la flecha back por defecto y agregar el icono de favoritos
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => auth && <Favorite />,
+      headerRight: () => auth && <Favorite id={pokemon?.id} />,
       headerLeft: () => (
         <Icon
           name="arrow-left"
@@ -36,7 +36,7 @@ export default function Pokemon(props) {
         />
       ),
     });
-  }, [navigation, params]); //Para cada vez que cambie de navigation o de parametro esto se vuelve a ejecutar
+  }, [navigation, params, pokemon]); //Para cada vez que cambie de navigation o de parametro esto se vuelve a ejecutar
 
   useEffect(() => {
     (async () => {

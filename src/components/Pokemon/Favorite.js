@@ -2,9 +2,10 @@ import { View, Text } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-export default function Favorite() {
+export default function Favorite(props) {
+  const { id } = props;
   const addFavorite = () => {
-    console.log("Added to favorires");
+    console.log("Added to favorires", id);
   };
   return (
     <Icon
