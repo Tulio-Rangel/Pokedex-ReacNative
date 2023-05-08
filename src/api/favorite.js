@@ -20,3 +20,13 @@ export async function addPokemonFavorite(id) {
     throw error;
   }
 }
+
+//Función para evitar pokemon repetido en favoritos
+export async function isPokemonFavoriteApi(id) {
+  try {
+    const response = await getPokemonsFavoriteApi();
+    return includes(response, id);
+  } catch (error) {
+    throw error;
+  }
+}
