@@ -7,6 +7,7 @@ import {
   addPokemonFavorite,
   isPokemonFavoriteApi,
   getPokemonsFavoriteApi,
+  removePokemonFavoriteApi,
 } from "../../api/favorite";
 
 export default function Favorite(props) {
@@ -42,8 +43,13 @@ export default function Favorite(props) {
     }
   };
 
-  const removeFavorite = () => {
-    console.log("Eliminar de favoritos");
+  const removeFavorite = async () => {
+    try {
+      await removePokemonFavoriteApi(id);
+      onReloadCheckFavorite();
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
